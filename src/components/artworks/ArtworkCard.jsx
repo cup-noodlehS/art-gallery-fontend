@@ -74,7 +74,7 @@ const ArtworkCard = (props) => {
 
         <div className="card-body py-3 px-5 min-h-[108px]">
             <div className='flex gap-2 items-center justify-between'>
-              <h2 className="card-title tracking-widest max-w-[180px] line-clamp-1 text-base">
+              <h2 className="card-title tracking-widest max-w-[260px] line-clamp-1 text-base">
                   {artwork.title}
               </h2>
             </div>
