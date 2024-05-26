@@ -47,7 +47,7 @@ function ProfilePage({params}) {
         setUsername(data.username);
         setAvatarUrl(data.avatarUrl || defaultAvatarUrl);
         setPhoneNum(data.phone_number || '');
-        setLocation(data.location || '');
+        setLocation(data.location?.name || '');
         setUserType(data.user_type || 0);
         setAchievements(data.achievements || '');
         setAbout(data.about || '');
