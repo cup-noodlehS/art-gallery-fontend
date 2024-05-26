@@ -25,7 +25,7 @@ const infoMaxLength = {
 }
 
 function RegisterPane() {
-    const { checkEmailAvailability, register, defaultAvatarUrl } = useAuthStore();
+    const { checkEmailAvailability, register, fetchUserLocations } = useAuthStore();
     const router = useRouter();
     const searchParams = useSearchParams();
     const redirect = searchParams.get('redirect') || '/';
@@ -42,7 +42,9 @@ function RegisterPane() {
     const [isCheckingEmail, setIsCheckingEmail] = useState(false);
     const [avatarUrl, setAvatarUrl] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [location, setlocation] = useState('');
+    const [locationInput, setlocationInput] = useState('');
+    const [locationChoices, setLocationChoices] = useState([]);
+    const [locationChosen, setLocationChosen] = useState(false);
     const [userType, setUserType] = useState(null);
     const [achievements, setAchievements] = useState('');
     const [about, setAbout] = useState('');
@@ -50,6 +52,9 @@ function RegisterPane() {
     const pfpInputRef = useRef(null);
     const [resizedImageUrl, setResizedImageUrl] = useState(null);
     const [imageFile, setImageFile] = useState(null);
+
+    const locationRef = useRef(null);
+    const [showLocationDropDown, setShowLocationDropDown] = useState(false);
 
     const handlePfpClick = () => {
         pfpInputRef.current.click();
@@ -100,6 +105,10 @@ function RegisterPane() {
     const removeImage = () => {
         setResizedImageUrl(null);
         setImageFile(null);
+    };
+
+    const limitPopulationCount = (count) => {
+        return count > 999 ? '1k+' : count;
     }
 
     useEffect(() => {
@@ -173,7 +182,7 @@ function RegisterPane() {
                 username: userName.trim(),
                 password: password.trim(),
                 phone_number: phoneNumber.trim(),
-                location: location.trim(),
+                location: locationInput.trim(),
                 achievements: achievements.trim(),
                 about: about.trim(),
             }
@@ -198,7 +207,29 @@ function RegisterPane() {
         } else {
             alert('Please fill in all fields correctly');
         }
-    }
+    };
+
+    const setLocations = useDebouncedCallback(() => {
+        if (locationChosen) {
+            setShowLocationDropDown(false);
+            return;
+        }
+        if (locationInput !== '') {
+            const filters = {
+                name__icontains: locationInput,
+            }
+            fetchUserLocations(filters).then(res => {
+                setLocationChoices(res.objects);
+                if (res.objects.length > 0) {
+                    setShowLocationDropDown(true);
+                } else {
+                    setShowLocationDropDown(false);
+                }
+            });
+        } else {
+            setShowLocationDropDown(false);
+        }
+    }, 500);
 
     useEffect(() => {
         if (email !== null) {
@@ -214,6 +245,25 @@ function RegisterPane() {
             checkPasswordsMatch();
         }
     }, [password, confirmPassword]);
+
+    useEffect(() => {
+        fetchUserLocations().then(res => {
+            setLocationChoices(res.objects);
+        });
+        const handleClickOutside = (event) => {
+            if (showLocationDropDown && locationRef.current && !locationRef.current.contains(event.target)) {
+                setShowLocationDropDown(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+    }, [])
+
+    useEffect(() => {
+        setLocations();
+    }, [locationInput])
 
     return (
         <>
@@ -387,7 +437,7 @@ function RegisterPane() {
                             </label>
                         </label>
 
-                        <label class="form-control w-full">
+                        <label class="form-control w-full" ref={locationRef}>
                             <div class="label">
                                 <span class="label-text flex items-center gap-1">
                                     <p>Location</p>
@@ -395,13 +445,39 @@ function RegisterPane() {
                             </div>
                             <label className="input input-bordered flex items-center gap-2 rounded-sm">
                                 <input
-                                    onChange={(e) => setlocation(e.target.value)}
+                                    value={locationInput}
+                                    onChange={(e) => {
+                                        setlocationInput(e.target.value);
+                                        setLocationChosen(false);
+                                    }}
+                                    onClick={() => setShowLocationDropDown(true)}
                                     type="text" className="grow" placeholder="Location" maxLength={infoMaxLength.location}
                                 />
                                 <div className="tooltip tooltip-left" data-tip="This information helps us recommend artworks near you or recommend your artworks to people nearby.">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 </div>
                             </label>
+                            <div className="relative w-full">
+                                {showLocationDropDown && locationChoices.length > 0 && (
+                                <div className="absolute w-full max-h-[200px] overflow-y-auto px-3 py-2 bg-white rounded-sm drop-shadow z-10">
+                                    {locationChoices.map((location, index) => (
+                                        <div
+                                            key={index}
+                                            className="p-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between gap-2 rounded-sm"
+                                            onClick={() => {
+                                                setShowLocationDropDown(false);
+                                                setLocationChosen(true);
+                                                setLocationChoices([]);
+                                                setlocationInput(location.name);
+                                            }}
+                                        >
+                                            <p className='max-w-[80%] truncate'>{location.name}</p>
+                                            <div className="badge">{limitPopulationCount(location.user_count)}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                                )}
+                            </div>
                         </label>
                     </div>
                 </div>

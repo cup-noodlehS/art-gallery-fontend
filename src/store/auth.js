@@ -10,7 +10,7 @@ User fields
 - username: string
 - avatar_url: string or null
 - phone_number: string or null
-- location: string or null
+- location: {name: string}
 - user_type: int (0: seller, 1: buyer)
 - achievements: string or null
 - about: string or null
@@ -76,6 +76,7 @@ export const useAuthStore = create((set) => ({
             throw error;
         }
     },
+
     checkEmailAvailability: async (email) => {
         try {
             const data = await axiosInstance.get('check-email/', { params: {email} });
@@ -85,15 +86,10 @@ export const useAuthStore = create((set) => ({
             return false;
         }
     },
+
     register: async (data) => {
-        const formData = new FormData();
-    
-        Object.keys(data).forEach(key => {
-            formData.append(key, data[key]);
-        });
-    
         try {
-            const response = await axiosInstance.post('register/', formData);
+            const response = await axiosInstance.post('register/', data);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -104,7 +100,14 @@ export const useAuthStore = create((set) => ({
 
     logout: () => {
         destroyCookie(null, 'jwt');
-        window.location.reload();
         set({ user: null });
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000)
+    },
+
+    fetchUserLocations: async (filters) => {
+        const response = await axiosInstance.get('user-location/', { params: filters })
+        return response.data
     }
 }));
