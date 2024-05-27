@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { useAuthStore } from '@/store/auth';
 import { useArtworkStore } from '@/store/artwork';
@@ -118,7 +119,7 @@ const Navbar = (props) => {
                         </svg>
                     </label>
                 )}
-                {!collapseLinks && (
+                {!collapseLinks ? (
                     <div className="flex gap-3">
                         {navRoutes.map(
                             (route, index) =>
@@ -216,6 +217,25 @@ const Navbar = (props) => {
                                     )}
                                 </div>
                             </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className="flex items-center">
+                        <button
+                            onClick={() =>
+                                setShowUserDropdown(!showUserDropdown)
+                            }
+                            className="text-2xl"
+                        >
+                            <FontAwesomeIcon icon={faBars} />
+                        </button>
+                        {showUserDropdown && (
+                            <UserDropdown
+                                smallScreen={true}
+                                userName={user.username}
+                                userId={user.id}
+                                avatarUrl={user.avatar_url}
+                            />
                         )}
                     </div>
                 )}

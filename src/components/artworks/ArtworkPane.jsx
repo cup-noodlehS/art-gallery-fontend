@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -19,12 +19,14 @@ import { useArtworkStore } from '@/store/artwork';
 import { useAuthStore } from '@/store/auth';
 
 const ARTWORK_SIZE_PER_REQUEST = 21;
+const LAPTOP_SCREEN_SIZE = 1024;
 
 const ArtworkPane = () => {
     const { fetchArtworks, fetchCategories } = useArtworkStore();
     const { user, defaultAvatarUrl } = useAuthStore();
     const router = useRouter();
     const pathname = usePathname();
+    const [screenWidth, setScreenWidth] = useState(0);
 
     const searchParams = useSearchParams();
     const paramSearchKey = searchParams.get('search');
@@ -42,8 +44,12 @@ const ArtworkPane = () => {
     const [finishedInitialFetch, setFinishedInitialFetch] = useState(false);
     const [showCategories, setShowCategories] = useState(true);
 
+    const categoryRef = useRef(null);
+
     const pageCount = Math.ceil(totalArtworks / ARTWORK_SIZE_PER_REQUEST);
     const currentPage = Math.ceil(top + 1 / ARTWORK_SIZE_PER_REQUEST);
+
+    const isTabletScreen = screenWidth < LAPTOP_SCREEN_SIZE;
 
     const initializeArtworks = async () => {
         await Promise.all([getArtworks(), getCategories()]);
@@ -126,16 +132,49 @@ const ArtworkPane = () => {
         getArtworks();
     }, [top]);
 
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        if (isTabletScreen) {
+            setShowCategories(false);
+        } else {
+            setShowCategories(true);
+        }
+    }, [isTabletScreen]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                isTabletScreen &&
+                showCategories &&
+                categoryRef.current &&
+                !categoryRef.current.contains(event.target)
+            ) {
+                setShowCategories(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () =>
+            document.removeEventListener('mousedown', handleClickOutside);
+    });
+
     return (
         <div className="container xl overflow-hidden mx-auto font-Adamina">
-            <div className="flex gap-3 mt-3 font-light">
+            <div className="flex gap-3 mt-3 font-light mx-2">
                 <Link href="/">Home</Link>
                 <h3>/</h3>
                 <Link href="/artworks" className="font-semibold">
                     Artworks
                 </Link>
             </div>
-            <div className="flex gap-5 min-h-lvh">
+            <div className="flex gap-5 min-h-lvh mx-2" ref={categoryRef}>
                 <CSSTransition
                     in={showCategories}
                     timeout={300}
@@ -222,8 +261,8 @@ const ArtworkPane = () => {
 
                 <div className="mt-5 grow">
                     <h1 className="text-3xl font-semibold">ARTWORKS</h1>
-                    <div className="flex flex-wrap gap-x-3 gap-y-3 items-center mt-2">
-                        <label className="input input-bordered flex bg-black/[.02] rounded-sm items-center gap-2 w-[50%]">
+                    <div className="flex flex-wrap gap-x-3 gap-y-3 items-center justify-center m-2">
+                        <label className="input input-bordered flex bg-black/[.02] rounded-sm items-center gap-2 min-w-[50%] grow">
                             <input
                                 value={searchKey}
                                 onChange={(event) =>
@@ -247,29 +286,33 @@ const ArtworkPane = () => {
                             </svg>
                         </label>
 
-                        <Link
-                            href={'/artworks/new'}
-                            className="btn btn-neutral text-xl rounded-sm font-normal h-[52px]"
-                        >
-                            <FontAwesomeIcon
-                                icon={faPlus}
-                                width={20}
-                                height={20}
-                            />
-                            Add Artwork
-                        </Link>
-                        <button
-                            onClick={() => setShowCategories(!showCategories)}
-                            className="btn rounded-sm"
-                        >
-                            <Icon
-                                path={mdiFilterVariant}
-                                size={1}
-                                color="currentColor"
-                            />
-                        </button>
+                        <div className="flex gap-2 items-stretch grow justify-end md:justify-start">
+                            <Link
+                                href={'/artworks/new'}
+                                className="btn btn-neutral text-xl rounded-sm font-normal h-[52px]"
+                            >
+                                <FontAwesomeIcon
+                                    icon={faPlus}
+                                    width={20}
+                                    height={20}
+                                />
+                                Add Artwork
+                            </Link>
+                            <button
+                                onClick={() =>
+                                    setShowCategories(!showCategories)
+                                }
+                                className="btn rounded-sm"
+                            >
+                                <Icon
+                                    path={mdiFilterVariant}
+                                    size={1}
+                                    color="currentColor"
+                                />
+                            </button>
+                        </div>
                     </div>
-                    <div className="mt-10 flex gap-5 flex-wrap">
+                    <div className="mt-10 flex gap-5 flex-wrap justify-center md:justify-start">
                         {isFetchingArtworks && (
                             <>
                                 {[...Array(8)].map((_, index) => (

@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,12 +9,16 @@ import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 import { useAuthStore } from '@/store/auth';
 
 const UserDropdown = forwardRef((props, ref) => {
     const { logout, defaultAvatarUrl } = useAuthStore();
-    const { userName, userId, avatarUrl } = props;
+    const { userName, userId, avatarUrl, smallScreen } = props;
+    const pathname = usePathname();
 
     return (
         <div
@@ -41,6 +45,40 @@ const UserDropdown = forwardRef((props, ref) => {
                         />
                         {userName}
                     </a>
+                    {smallScreen && <hr className="opacity-20"></hr>}
+                    {smallScreen && (
+                        <div className="flex flex-col gap-2 pl-3">
+                            <a
+                                href={`/`}
+                                className={`flex gap-2 items-center text-white hover:underline transition duration-100 ${pathname === '/' ? 'opacity-100' : 'opacity-50'}`}
+                            >
+                                <FontAwesomeIcon icon={faHouse} />
+                                Home
+                            </a>
+                            <a
+                                href={`/artworks`}
+                                className={`flex gap-2 items-center text-white hover:underline transition duration-100 ${pathname === '/artworks' ? 'opacity-100' : 'opacity-50'}`}
+                            >
+                                <FontAwesomeIcon icon={faPalette} />
+                                Artworks
+                            </a>
+                            <a
+                                href={`/`}
+                                className="flex gap-2 items-center text-white hover:underline transition duration-100 opacity-50"
+                            >
+                                <FontAwesomeIcon icon={faMessage} />
+                                Messages
+                            </a>
+                            <a
+                                href={`/`}
+                                className="flex gap-2 items-center text-white hover:underline transition duration-100 opacity-50"
+                            >
+                                <FontAwesomeIcon icon={faBell} />
+                                Notifications
+                            </a>
+                        </div>
+                    )}
+
                     <hr className="opacity-20"></hr>
                     <div className="flex flex-col gap-2 pl-3">
                         <a
