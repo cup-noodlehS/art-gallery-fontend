@@ -30,6 +30,7 @@ function RegisterPane() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const redirect = searchParams.get('redirect') || '/';
+    const { uploadImage } = useCloudinaryStore();
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [email, setEmail] = useState(null);
@@ -184,6 +185,20 @@ function RegisterPane() {
             console.log(splitedName, 'splitedName');
             const lastName = splitedName.pop();
             const firstName = splitedName.join('');
+            const avatarData = {
+                file: imageFile,
+                width: 300,
+                height: 300,
+                cover: 'fill',
+                folder: 'pfp',
+            };
+            const avatarResponse = await uploadImage(avatarData).catch((e) => {
+                console.error(e);
+                setIsSubmitting(false);
+                return;
+            });
+            const avatarUrl = avatarResponse.url;
+
             const data = {
                 email: email.trim(),
                 first_name: firstName,
@@ -194,6 +209,7 @@ function RegisterPane() {
                 location: locationInput.trim(),
                 achievements: achievements.trim(),
                 about: about.trim(),
+                avatar_url: avatarUrl,
             };
             if (userType) {
                 data['user_type'] = userType;
@@ -543,10 +559,9 @@ function RegisterPane() {
                                 </div>
                             ) : (
                                 <button
-                                    disabled
                                     onClick={handlePfpClick}
                                     type="button"
-                                    className="cursor-not-allowed flex justify-center items-center border-dashed border-2 border-sky-300 rounded-full w-[100px] h-[100px] hover:bg-sky-100 transition duration-100"
+                                    className="flex justify-center items-center border-dashed border-2 border-sky-300 rounded-full w-[100px] h-[100px] hover:bg-sky-100 transition duration-100"
                                 >
                                     <FontAwesomeIcon
                                         className="text-sky-300 w-[15px] h-[15px]"
