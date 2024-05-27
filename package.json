@@ -1,43 +1,43 @@
 {
-  "name": "art-bidding-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.2",
-    "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/free-regular-svg-icons": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@material-tailwind/react": "^2.1.9",
-    "@mdi/js": "^7.4.47",
-    "@mdi/react": "^1.6.1",
-    "autoprefixer": "^10.4.19",
-    "axios": "^1.6.8",
-    "next": "14.2.3",
-    "nookies": "^2.5.2",
-    "path": "^0.12.7",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-image-crop": "^11.0.5",
-    "react-transition-group": "^4.4.5",
-    "sass": "^1.75.0",
-    "use-debounce": "^10.0.0",
-    "zustand": "^4.5.2"
-  },
-  "devDependencies": {
-    "daisyui": "^4.10.2",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3",
-    "postcss": "^8",
-    "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.1"
-  }
+    "name": "art-bidding-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.5.2",
+        "@fortawesome/free-brands-svg-icons": "^6.5.2",
+        "@fortawesome/free-regular-svg-icons": "^6.5.2",
+        "@fortawesome/free-solid-svg-icons": "^6.5.2",
+        "@fortawesome/react-fontawesome": "^0.2.0",
+        "@material-tailwind/react": "^2.1.9",
+        "@mdi/js": "^7.4.47",
+        "@mdi/react": "^1.6.1",
+        "autoprefixer": "^10.4.19",
+        "axios": "^1.6.8",
+        "next": "14.2.3",
+        "nookies": "^2.5.2",
+        "path": "^0.12.7",
+        "react": "^18",
+        "react-dom": "^18",
+        "react-image-crop": "^11.0.5",
+        "react-transition-group": "^4.4.5",
+        "sass": "^1.75.0",
+        "use-debounce": "^10.0.0",
+        "zustand": "^4.5.2"
+    },
+    "devDependencies": {
+        "daisyui": "^4.10.2",
+        "eslint": "^8",
+        "eslint-config-next": "14.2.3",
+        "postcss": "^8",
+        "prettier": "^3.2.5",
+        "tailwindcss": "^3.4.1"
+    }
 }
