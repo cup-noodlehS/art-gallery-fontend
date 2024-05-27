@@ -28,16 +28,9 @@ export default function Home() {
   const [artworks, setArtworks] = useState([]);
   const [topArtist, setTopArtist] = useState([]);
   const [featuredArtworks, setFeaturedArtworks] = useState([]);
-  const [featureIndex, setFeatureIndex] = useState(0);
-  const [featureContWidth, setFeatureContWidth] = useState(0);
-  const [ratio, setRatio] = useState(9/16)
-  const featureContHeight = featureContWidth * ratio;
   const [screenWidth, setScreenWidth] = useState();
-  const [isSmallScreen, setIsSmallScreen] = useState(false)
 
-  const featuredArtwork = featuredArtworks[featureIndex];
-  const featuredArtworkImage = !isSmallScreen ? (featuredArtwork?.image_url || defaultAvatarUrl) 
-    : featuredArtwork?.artwork?.first_image.image_url || defaultAvatarUrl;
+  const isSmallScreen = screenWidth < LAPTOP_SCREEN;
 
   const getFeaturedArtworks = async () => {
     setIsLoadingFeatured(true);
@@ -52,31 +45,6 @@ export default function Home() {
     setArtworks(data.objects);
     setIsLoadingArtworks(false);
   }
-
-  const moveFeatureIndex = () => {
-    setTimeout(() => {
-      if (featureIndex === featuredArtworks.length - 1) {
-        setFeatureIndex(0);
-      } else {
-        setFeatureIndex(featureIndex + 1);
-      }
-    
-    }, 5000)
-  }
-
-  useEffect(() => {
-  }, [featureIndex])
-  moveFeatureIndex();
-  
-  useEffect(() => {
-    if (screenWidth < LAPTOP_SCREEN) {
-      setIsSmallScreen(true);
-      setRatio(4/3);
-    } else {
-      setIsSmallScreen(false);
-      setRatio(9/16);
-    }
-  }, [screenWidth])
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);

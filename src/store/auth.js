@@ -1,5 +1,5 @@
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
-import create from 'zustand';
+import { create } from 'zustand';
 import axiosInstance from '@/utils/axios';
 
 

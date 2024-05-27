@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import axiosInstance from '@/utils/axios';
 
 // Note: computed fields are fields that are derived from other fields in the model
