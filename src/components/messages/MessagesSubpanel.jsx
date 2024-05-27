@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function MessagesSubpanel() {
-    return (
-        <div>MessagesSubpanel</div>
-    )
+  return <div>MessagesSubpanel</div>;
 }
 
-export default MessagesSubpanel
+export default MessagesSubpanel;

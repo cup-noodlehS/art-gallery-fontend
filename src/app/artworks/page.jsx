@@ -1,4 +1,3 @@
-
 import Navbar from '@/components/generics/navbar';
 import Footer from '@/components/generics/Footer';
 import ArtworkPane from '@/components/artworks/ArtworkPane';
@@ -10,7 +9,7 @@ export const metadata = {
 
 const ArtworksPage = () => {
   return (
-    <div className='max-w-screen overflow-x-hidden'>
+    <div className="max-w-screen overflow-x-hidden">
       <Navbar />
       <ArtworkPane />
       <Footer />

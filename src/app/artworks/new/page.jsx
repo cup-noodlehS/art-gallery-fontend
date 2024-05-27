@@ -3,18 +3,18 @@ import Footer from '@/components/generics/Footer';
 import NewArtworkPane from '@/components/artworks/NewArtworkPane';
 
 export const metadata = {
-    title: 'FASO GALLERY | New Artwork',
-    description: 'Create a new artwork.',
+  title: 'FASO GALLERY | New Artwork',
+  description: 'Create a new artwork.',
 };
 
 function page() {
-    return (
+  return (
     <>
-        <Navbar />
-        <NewArtworkPane />
-        <Footer />
+      <Navbar />
+      <NewArtworkPane />
+      <Footer />
     </>
-    )
+  );
 }
 
-export default page
+export default page;

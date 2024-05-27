@@ -1,11 +1,9 @@
-import { ArtDataProvider } from '../context/ArtDataContext'
- 
+import { ArtDataProvider } from '../context/ArtDataContext';
+
 export default function Layout({ children }) {
   return (
     <>
-      <ArtDataProvider>
-        {children}
-      </ArtDataProvider>
+      <ArtDataProvider>{children}</ArtDataProvider>
     </>
-  )
+  );
 }

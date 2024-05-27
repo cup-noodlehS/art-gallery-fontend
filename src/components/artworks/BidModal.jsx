@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function BidModal() {
-    return (
-        <div>BidModal</div>
-    )
+  return <div>BidModal</div>;
 }
 
-export default BidModal
+export default BidModal;
