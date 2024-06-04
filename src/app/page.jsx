@@ -70,13 +70,11 @@ export default function Home() {
     return (
         <div className="overflow-x-hidden home-page">
             {isLoadingFeatured && <FullFullLoader />}
-            <div className="fixed z-30">
-                <Navbar showSearch={true} />
-            </div>
+            <Navbar showSearch={true} />
             <main className="min-h-screen pb-72 font-Adamina">
                 <div className="container max-w-[1536px] mx-auto">
                     {!isLoadingArtworks && (
-                        <div className="w-full h-lvh pt-[75px] sm:h-[925px]">
+                        <div className="w-full h-lvh ">
                             <Carousel
                                 autoplay
                                 loop
