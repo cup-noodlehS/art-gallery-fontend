@@ -45,7 +45,7 @@ function ProfilePage({ params }) {
         console.log(router, 'heree');
         setEmail(data.email);
         setUsername(data.username);
-        setAvatarUrl(data.avatarUrl || defaultAvatarUrl);
+        setAvatarUrl(data.avatar_url || defaultAvatarUrl);
         setPhoneNum(data.phone_number || '');
         setLocation(data.location?.name || '');
         setUserType(data.user_type || 0);
@@ -148,7 +148,7 @@ function ProfilePage({ params }) {
                         </div>
                         <div className="mb-3 w-full">
                             <p className="font-bold text-lg">About</p>
-                            <pre className="w-full break-all whitespace-pre-wrap font-Adamina">
+                            <pre className="w-full whitespace-pre-wrap font-Adamina">
                                 {about ? (
                                     about
                                 ) : (
@@ -163,7 +163,7 @@ function ProfilePage({ params }) {
                                 <p className="font-bold text-lg">
                                     Achievements
                                 </p>
-                                <pre className="w-full break-all whitespace-pre-wrap font-Adamina">
+                                <pre className="w-full whitespace-pre-wrap font-Adamina">
                                     {achievements}
                                 </pre>
                             </div>

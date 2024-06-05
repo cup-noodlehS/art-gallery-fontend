@@ -119,8 +119,8 @@ function NewArtworkPane() {
     };
 
     const createNewCategory = () => {
-        setIsCreatingCategory(true);
         if (categorySearchKey.trim().length === 0) return;
+        setIsCreatingCategory(true);
         createCategory(categorySearchKey.trim()).then((res) => {
             setCategory(res.name);
             setCategoryId(res.id);

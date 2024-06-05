@@ -166,7 +166,7 @@ const ArtworkPane = () => {
     });
 
     return (
-        <div className="container xl overflow-hidden mx-auto font-Adamina">
+        <div className="container xl overflow-hidden mx-auto font-Adamina artworks-pane">
             <div className="flex gap-3 mt-3 font-light mx-2">
                 <Link href="/">Home</Link>
                 <h3>/</h3>
@@ -181,7 +181,7 @@ const ArtworkPane = () => {
                     classNames="category"
                     unmountOnExit
                 >
-                    <div className="max-w-[240px] min-w-[240px] px-3 bg-black/[.02] border-r border-black/[.1]">
+                    <div className="max-w-[240px] min-w-[240px] px-3 bg-gray-50 border-r border-black/[.1] custom-right-shadow">
                         <h3 className="text-2xl font-semibold mt-5 mb-2">
                             Top Categories
                         </h3>

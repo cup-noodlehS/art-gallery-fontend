@@ -9,7 +9,7 @@ export const metadata = {
 
 const ArtworksPage = () => {
     return (
-        <div className="max-w-screen overflow-x-hidden">
+        <div className="max-w-screen overflow-x-hidden bg-gray-50">
             <Navbar />
             <ArtworkPane />
             <Footer />

@@ -119,6 +119,16 @@ body {
     }
 }
 
+.artworks-pane {
+    .custom-left-shadow {
+        box-shadow: -10px 0 15px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    .custom-right-shadow {
+        box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.05);
+    }
+}
+
 @keyframes loading {
     100% {
         transform: translateX(100%);
