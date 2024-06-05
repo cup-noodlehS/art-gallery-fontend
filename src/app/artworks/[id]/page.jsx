@@ -29,7 +29,14 @@ const SingleArtworkPage = ({ params }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const prevPath = searchParams.get('prev');
-    const { user, getUser, defaultAvatarUrl } = useAuthStore();
+    const {
+        user,
+        getUser,
+        defaultAvatarUrl,
+        createFollowing,
+        deleteFollowing,
+        fetchFollowings,
+    } = useAuthStore();
     const {
         fetchArtwork,
         deleteArtwork,
@@ -53,6 +60,7 @@ const SingleArtworkPage = ({ params }) => {
     const [likeId, setLikeId] = useState(null);
     const [likesCount, setLikesCount] = useState(0);
     const [showActions, setShowActions] = useState(false);
+    const [isFollowing, setIsFollowing] = useState(false);
 
     const actionsCont = useRef(null);
 
@@ -74,13 +82,23 @@ const SingleArtworkPage = ({ params }) => {
     const checkLike = async () => {
         const user = await getUser();
         if (!user) return;
-        const filters = {
+        checkFollowing(user);
+        let filters = {
             artwork_id: artworkId,
             user_id: user.id,
         };
         const like = await fetchLikes(filters);
         setArtworkLiked(like.objects.length > 0);
         setLikeId(like.objects[0]?.id);
+    };
+
+    const checkFollowing = async (user) => {
+        if (!user) return;
+        const filters = {
+            followed_id: artwork.artist.id,
+        };
+        const followings = await fetchFollowings(filters);
+        setIsFollowing(followings.objects.length > 0);
     };
 
     const toggleLike = async () => {
@@ -128,19 +146,25 @@ const SingleArtworkPage = ({ params }) => {
 
     const fetchArtworkById = async () => {
         try {
+            await getUser();
             setIsLoadingArtwork(true);
             const data = await fetchArtwork(artworkId);
             setArtwork(data);
             setLikesCount(data.likes_count);
             document.title = `${data.title} | FASO Gallery`;
             setSelectedImage(data.first_image?.image_url);
-            await checkLike();
         } catch (error) {
             console.error('Error fetching artwork:', error);
         } finally {
             setIsLoadingArtwork(false);
         }
     };
+
+    useEffect(() => {
+        if (artwork) {
+            checkLike();
+        }
+    }, [artwork]);
 
     const changeToSold = async () => {
         try {
@@ -156,6 +180,34 @@ const SingleArtworkPage = ({ params }) => {
             console.error('Error updating artwork:', error);
         } finally {
             setIsLoadingArtwork(false);
+        }
+    };
+
+    const toggleFollow = async () => {
+        if (!user) {
+            router.push(`/login?redirect=/artworks/${artwork.slug}`);
+            return;
+        }
+        if (user.id === artwork.artist.id) return;
+        if (isFollowing) {
+            setArtwork({
+                ...artwork,
+                artist: {
+                    ...artwork.artist,
+                    followers_count: artwork.artist.followers_count - 1,
+                },
+            });
+            await deleteFollowing(artwork.artist.id);
+            setIsFollowing(false);
+        } else {
+            setArtwork({
+                ...artwork,
+                artist: {
+                    ...artwork.artist,
+                    followers_count: artwork.artist.followers_count + 1,
+                },
+            });
+            await createFollowing(artwork.artist.id);
         }
     };
 
@@ -394,7 +446,8 @@ const SingleArtworkPage = ({ params }) => {
                                             {artwork.artist.username}
                                         </Link>
                                         <span className="text-xs text-gray-600">
-                                            10k followers
+                                            {artwork.artist.followers_count}{' '}
+                                            followers
                                         </span>
                                     </div>
                                 </div>
@@ -410,9 +463,16 @@ const SingleArtworkPage = ({ params }) => {
                                             className="text-2xl cursor-pointer"
                                         />
                                     </a>
-                                    <button className="btn rounded-full">
-                                        Folow
-                                    </button>
+                                    {!isArtworkArtist && (
+                                        <button
+                                            onClick={toggleFollow}
+                                            className="btn rounded-full"
+                                        >
+                                            {isFollowing
+                                                ? 'Unfollow'
+                                                : 'Follow'}
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

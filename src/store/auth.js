@@ -121,4 +121,34 @@ export const useAuthStore = create((set) => ({
         });
         return response.data;
     },
+
+    createFollowing: async (id) => {
+        try {
+            const data = {
+                following_id: id,
+            };
+            const response = await axiosInstance.post('following/', data);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    },
+
+    deleteFollowing: async (id) => {
+        try {
+            const response = await axiosInstance.delete(`following/${id}/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    },
+
+    fetchFollowings: async (filters = {}) => {
+        const response = await axiosInstance.get('following/', {
+            params: filters,
+        });
+        return response.data;
+    },
 }));
