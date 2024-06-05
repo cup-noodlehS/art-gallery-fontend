@@ -4,15 +4,13 @@ import './globals.scss';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-    title: 'FASO | GALLERY',
+    title: 'FA | GALLERY',
     description: 'An art auction website for artists and art enthusiasts.',
     keywords:
         'art, auction, artists, gallery, art enthusiasts, paintings, sculptures',
     author: 'Sheldon Arthur Sagrado',
-    ogTitle: 'FASO | GALLERY',
+    ogTitle: 'FA | GALLERY',
     ogDescription: 'An art auction website for artists and art enthusiasts.',
-    // ogUrl: "https://www.faso-gallery.com",
-    // ogImage: "/images/og-image.jpg",
 };
 
 export default function RootLayout({ children }) {

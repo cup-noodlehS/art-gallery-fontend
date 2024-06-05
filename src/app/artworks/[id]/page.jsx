@@ -105,8 +105,10 @@ const SingleArtworkPage = ({ params }) => {
         if (!user) return;
         const filters = {
             followed_id: artwork.artist.id,
+            follower_id: user.id,
         };
         const followings = await fetchFollowings(filters);
+        console.log('followings:', followings);
         setIsFollowing(followings.objects.length > 0);
     };
 
@@ -160,7 +162,7 @@ const SingleArtworkPage = ({ params }) => {
             const data = await fetchArtwork(artworkId);
             setArtwork(data);
             setLikesCount(data.likes_count);
-            document.title = `${data.title} | FASO Gallery`;
+            document.title = `${data.title} | FA Gallery`;
             setSelectedImage(data.first_image?.image_url);
         } catch (error) {
             console.error('Error fetching artwork:', error);
@@ -179,9 +181,11 @@ const SingleArtworkPage = ({ params }) => {
         try {
             setIsLoadingArtwork(true);
             const data = {
-                ...artwork,
                 status: 1,
                 artist_id: artwork.artist.id,
+                description: artwork.description,
+                title: artwork.title,
+                image_urls: artwork.images.map((image) => image.image_url),
             };
             await updateArtwork(artwork.id, data);
             await fetchArtworkById();
@@ -282,7 +286,7 @@ const SingleArtworkPage = ({ params }) => {
                                 artwork.status === 0 &&
                                 artwork?.current_highest_bid && (
                                     <button
-                                        onClick={() => changeToSold()}
+                                        onClick={changeToSold}
                                         className="btn btn-neutral rounded-sm text-xl font-medium"
                                     >
                                         Sell Artwork

@@ -20,7 +20,7 @@ function page() {
                 </p>
                 <a
                     className="flex gap-2 items-center"
-                    href="mailto:fasogallery@gmail.com"
+                    href="mailto:fagallery@gmail.com"
                     target="_blank"
                 >
                     <FontAwesomeIcon
@@ -29,7 +29,7 @@ function page() {
                         height={20}
                         className="text-xl"
                     />
-                    <span>fasogallery@gmail.com</span>
+                    <span>fagallery@gmail.com</span>
                 </a>
                 <Link href={'/artworks'} className="btn btn-neutral rounded-sm">
                     Go to artworks

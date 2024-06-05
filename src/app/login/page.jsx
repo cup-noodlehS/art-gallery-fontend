@@ -2,9 +2,9 @@ import Navbar from '@/components/generics/navbar';
 import LoginPane from '@/components/auth/LoginPane';
 
 export const metadata = {
-    title: 'FASO GALLERY | login',
+    title: 'FA GALLERY | login',
     description:
-        'Login to FASO GALLERY to start bidding on your favorite artworks.',
+        'Login to FA GALLERY to start bidding on your favorite artworks.',
 };
 
 function Page() {

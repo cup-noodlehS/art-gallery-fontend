@@ -1,8 +1,8 @@
 import Navbar from '@/components/generics/navbar';
 
 export const metadata = {
-    title: 'FASO GALLERY | About Us',
-    description: 'Learn more about FASO GALLERY and its mission.',
+    title: 'FA GALLERY | About Us',
+    description: 'Learn more about FA GALLERY and its mission.',
 };
 
 function Page() {
