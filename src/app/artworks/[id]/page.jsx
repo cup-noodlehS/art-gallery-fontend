@@ -11,6 +11,7 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
@@ -77,6 +78,14 @@ const SingleArtworkPage = ({ params }) => {
             return count;
         }
         return `${(count / 1000).toFixed(1)}k`;
+    };
+
+    const share = () => {
+        navigator.clipboard.writeText(
+            `${window.location.origin}/artworks/${artwork.slug}`
+        );
+        setShowActions(false);
+        alert('Link copied to clipboard!');
     };
 
     const checkLike = async () => {
@@ -288,6 +297,15 @@ const SingleArtworkPage = ({ params }) => {
                                 {showActions && (
                                     <div className="relative">
                                         <div className="absolute flex flex-col gap-2 min-w-[100px] bg-gray-50 px-5 py-3 rounded-sm shadow translate-x-[-90%]">
+                                            <button
+                                                onClick={share}
+                                                className="w-max flex gap-2 items-center"
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faShare}
+                                                />
+                                                <span>Share</span>
+                                            </button>
                                             {isArtworkArtist && (
                                                 <div className="flex flex-col gap-2 items-start w-max">
                                                     {artwork.status === 0 ? (

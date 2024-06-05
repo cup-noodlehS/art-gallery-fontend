@@ -114,8 +114,8 @@ function NewArtworkPane() {
             router.push(`/artworks/${res.artwork.slug}`);
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
-        setIsLoading(false);
     };
 
     const createNewCategory = () => {

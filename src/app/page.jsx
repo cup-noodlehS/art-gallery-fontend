@@ -184,6 +184,9 @@ export default function Home() {
                                             src={
                                                 !isSmallScreen
                                                     ? artwork.image_url ||
+                                                      artwork.artwork
+                                                          ?.first_image
+                                                          .image_url ||
                                                       defaultAvatarUrl
                                                     : artwork.artwork
                                                           ?.first_image

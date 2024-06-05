@@ -100,7 +100,7 @@ function ProfilePage({ params }) {
             <Navbar />
             <div className="flex w-full bg-gray-50">
                 <main className="container mx-auto min-h-lvh font-Adamina flex gap-5 bg-white">
-                    <section className="grow flex flex-col gap-3 items-center max-w-[270px] pt-5 pb-10 rounded-b-md px-5 bg-gray-50 custom-right-shadow">
+                    <section className="grow flex flex-col gap-3 items-center max-w-[370px] pt-5 pb-10 rounded-b-md px-5 bg-gray-50 custom-right-shadow">
                         <div>
                             <div className="relative flex justify-end">
                                 <div className="absolute badge badge-neutral translate-x-[20%] translate-y-[40%]">
