@@ -21,6 +21,7 @@
         "@mdi/react": "^1.6.1",
         "autoprefixer": "^10.4.19",
         "axios": "^1.6.8",
+        "dotenv": "^16.4.5",
         "next": "14.2.3",
         "nookies": "^2.5.2",
         "path": "^0.12.7",
