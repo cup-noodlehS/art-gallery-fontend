@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,7 @@ import '@/styles/ArtworkPane.scss';
 
 import ArtworkCard from '@/components/artworks/ArtworkCard';
 import BaseLoading from '@/components/generics/BaseLoading';
+import FullLoader from '../generics/FullFullLoader';
 
 import { useArtworkStore } from '@/store/artwork';
 import { useAuthStore } from '@/store/auth';
@@ -383,4 +384,10 @@ const ArtworkPane = () => {
     );
 };
 
-export default ArtworkPane;
+const ComponentWithSuspense = () => (
+    <Suspense fallback={<FullLoader />}>
+        <ArtworkPane />
+    </Suspense>
+);
+
+export default ComponentWithSuspense;

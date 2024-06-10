@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import Navbar from '@/components/generics/navbar';
 import Footer from '@/components/generics/Footer';
 import { useRouter } from 'next/navigation';
@@ -605,4 +605,10 @@ const SingleArtworkPage = ({ params }) => {
     );
 };
 
-export default SingleArtworkPage;
+const ComponentWithSuspense = (props) => (
+    <Suspense fallback={<FullLoader />}>
+        <SingleArtworkPage {...props} />
+    </Suspense>
+);
+
+export default ComponentWithSuspense;

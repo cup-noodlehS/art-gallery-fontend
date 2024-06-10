@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -766,4 +766,10 @@ function RegisterPane() {
     );
 }
 
-export default RegisterPane;
+const ComponentWithSuspense = (props) => (
+    <Suspense fallback={<FullLoader />}>
+        <RegisterPane {...props} />
+    </Suspense>
+);
+
+export default ComponentWithSuspense;

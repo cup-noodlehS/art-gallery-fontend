@@ -1,10 +1,11 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 import { useAuthStore } from '@/store/auth';
+import FullLoader from '../generics/FullFullLoader';
 
 function LoginPane() {
     const { user, login, getUser } = useAuthStore();
@@ -144,4 +145,10 @@ function LoginPane() {
     );
 }
 
-export default LoginPane;
+const ComponentWithSuspense = (props) => (
+    <Suspense fallback={<FullLoader />}>
+        <LoginPane {...props} />
+    </Suspense>
+);
+
+export default ComponentWithSuspense;
