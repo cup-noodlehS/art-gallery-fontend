@@ -232,9 +232,9 @@ const Navbar = (props) => {
                         {showUserDropdown && (
                             <UserDropdown
                                 smallScreen={true}
-                                userName={user.username}
-                                userId={user.id}
-                                avatarUrl={user.avatar_url}
+                                userName={user?.username || null}
+                                userId={user?.id || null}
+                                avatarUrl={user?.avatar_url || null}
                             />
                         )}
                     </div>
