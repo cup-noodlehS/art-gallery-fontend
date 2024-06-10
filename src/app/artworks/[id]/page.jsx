@@ -162,7 +162,7 @@ const SingleArtworkPage = ({ params }) => {
             const data = await fetchArtwork(artworkId);
             setArtwork(data);
             setLikesCount(data.likes_count);
-            document.title = `${data.title} | FA Gallery`;
+            document.title = `${data.title} | Moonine Gallery`;
             setSelectedImage(data.first_image?.image_url);
         } catch (error) {
             console.error('Error fetching artwork:', error);

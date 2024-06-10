@@ -84,7 +84,7 @@ function ProfilePage({ params }) {
             try {
                 const res = await getGalleryUser(id);
                 initializeUser(res);
-                document.title = `${res.username} | FA GALLERY`;
+                document.title = `${res.username} | Moonine GALLERY`;
                 await Promise.all([getArtworks(), getBids()]);
             } catch (e) {
                 console.error(e);

@@ -197,7 +197,7 @@ function RegisterPane() {
                 setIsSubmitting(false);
                 return;
             });
-            const avatarUrl = avatarResponse.url;
+            const avatarUrl = avatarResponse?.url || null;
 
             const data = {
                 email: email.trim(),

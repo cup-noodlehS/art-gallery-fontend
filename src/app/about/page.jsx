@@ -1,8 +1,8 @@
 import Navbar from '@/components/generics/navbar';
 
 export const metadata = {
-    title: 'FA GALLERY | About Us',
-    description: 'Learn more about FA GALLERY and its mission.',
+    title: 'Moonine GALLERY | About Us',
+    description: 'Learn more about Moonine GALLERY and its mission.',
 };
 
 function page() {
