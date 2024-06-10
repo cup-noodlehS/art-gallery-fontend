@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import Navbar from '@/components/generics/navbar';
+import WelcomeModal from '@/components/generics/WelcomeModal';
 import ArtworkCard from '@/components/artworks/ArtworkCard';
 import BaseLoading from '@/components/generics/BaseLoading';
 import Footer from '@/components/generics/Footer';
@@ -30,6 +31,7 @@ export default function Home() {
     const [topArtist, setTopArtist] = useState([]);
     const [featuredArtworks, setFeaturedArtworks] = useState([]);
     const [screenWidth, setScreenWidth] = useState();
+    const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
     const isSmallScreen = screenWidth < LAPTOP_SCREEN;
 
@@ -66,6 +68,12 @@ export default function Home() {
         };
         getArtworks(artworksFilters);
         fetchTopArtist().then((artist) => setTopArtist(artist));
+    }, []);
+
+    useEffect(() => {
+        if (localStorage.getItem('show-welcome-modal') !== 'false') {
+            setShowWelcomeModal(true);
+        }
     }, []);
     return (
         <div className="overflow-x-hidden home-page">
@@ -289,6 +297,13 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+                {showWelcomeModal && (
+                    <WelcomeModal
+                        close={() => {
+                            setShowWelcomeModal(false);
+                        }}
+                    />
+                )}
             </main>
             {!isLoadingFeatured && <Footer />}
         </div>

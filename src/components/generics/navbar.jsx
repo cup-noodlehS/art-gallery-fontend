@@ -41,7 +41,7 @@ const Navbar = (props) => {
 
     useEffect(() => {
         if (!isLoggedIn) getUser();
-    }, [pathname]);
+    }, []);
 
     useEffect(() => {
         function handleClickOutside(event) {

@@ -113,6 +113,7 @@ const SingleArtworkPage = ({ params }) => {
     };
 
     const toggleLike = async () => {
+        const user = user || (await getUser());
         if (!user) {
             router.push(`/login?redirect=/artworks/${artwork.slug}`);
             return;
@@ -197,6 +198,7 @@ const SingleArtworkPage = ({ params }) => {
     };
 
     const toggleFollow = async () => {
+        const user = user || (await getUser());
         if (!user) {
             router.push(`/login?redirect=/artworks/${artwork.slug}`);
             return;
@@ -226,7 +228,6 @@ const SingleArtworkPage = ({ params }) => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            console.log('hereeee!!!', showActions);
             if (
                 actionsCont.current &&
                 !actionsCont.current.contains(event.target)
