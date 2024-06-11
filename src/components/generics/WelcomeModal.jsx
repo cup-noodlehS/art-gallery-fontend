@@ -37,23 +37,24 @@ function WelcomeModal(props) {
                     </button>
                 </div>
                 <h1 className="font-bold text-xl text-center mb-2">
-                    Welcome to Moonine Gallery!
+                    Welcome to MoonNine Gallery!
                 </h1>
 
                 <h2 className="italic mb-1 font-semibold">
                     This is a Prototype Functional Website
                 </h2>
                 <p className="mb-3">
-                    Greetings! Thank you for visiting Moonine Gallery. Please
+                    Greetings! Thank you for visiting MoonNine Gallery. Please
                     note that this platform is currently in its prototype phase,
                     serving as a glimpse into a larger vision. Also, this is
                     deployed in a slow server, so please be patient.
                 </p>
                 <h2 className="italic mb-1 font-semibold">What&apos;s Next?</h2>
                 <p className="mb-3">
-                    Moonine Gallery aims to evolve into a comprehensive platform
-                    for artists, offering features such as blog posting, artwork
-                    sales and auctions, freelancer connections, and much more.
+                    MoonNine Gallery aims to evolve into a comprehensive
+                    platform for artists, offering features such as blog
+                    posting, artwork sales and auctions, freelancer connections,
+                    and much more.
                 </p>
                 <h2 className="italic mb-1 font-semibold">Stay in the Loop!</h2>
                 <p className="mb-3">

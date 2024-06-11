@@ -71,7 +71,7 @@ function LoginPane() {
                 />
             </div>
             <h1 className="text-3xl font-semibold text-center my-5">
-                {!paramEmail ? 'Welcome back!' : 'Moonine | GALLERY'}
+                {!paramEmail ? 'Welcome back!' : 'MoonNine | GALLERY'}
             </h1>
 
             <label className="input input-bordered flex items-center gap-2 rounded-sm">

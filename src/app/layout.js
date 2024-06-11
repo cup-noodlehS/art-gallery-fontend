@@ -4,12 +4,12 @@ import './globals.scss';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-    title: 'Moonine | GALLERY',
+    title: 'MoonNine | GALLERY',
     description: 'An art auction website for artists and art enthusiasts.',
     keywords:
         'art, auction, artists, gallery, art enthusiasts, paintings, sculptures',
     author: 'Sheldon Arthur Sagrado',
-    ogTitle: 'Moonine | GALLERY',
+    ogTitle: 'MoonNine | GALLERY',
     ogDescription: 'An art auction website for artists and art enthusiasts.',
 };
 
