@@ -29,7 +29,7 @@ function WelcomeModal(props) {
         <div class="fixed z-[9999] top-0 left-0 w-screen h-screen bg-black/[0.6] flex items-center justify-center">
             <div
                 ref={contRef}
-                class="absolute bg-white p-5 rounded-md max-h-[80%] overflow-y-auto max-w-[400px] z-[99999]"
+                class="absolute bg-white p-5 rounded-md max-h-[80%] overflow-y-auto w-[400px] max-w-[90%] z-[99999]"
             >
                 <div className="flex justify-end">
                     <button onClick={close}>
