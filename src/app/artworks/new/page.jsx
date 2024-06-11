@@ -3,7 +3,7 @@ import Footer from '@/components/generics/Footer';
 import NewArtworkPane from '@/components/artworks/NewArtworkPane';
 
 export const metadata = {
-    title: 'MoonNine GALLERY | New Artwork',
+    title: 'MooNine GALLERY | New Artwork',
     description: 'Create a new artwork.',
 };
 

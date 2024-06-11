@@ -90,7 +90,7 @@ const Navbar = (props) => {
                         height={30}
                     />
                     <h1 className="text-2xl font-semibold text-black font-Adamina">
-                        MoonNine | GALLERY
+                        MooNine | GALLERY
                     </h1>
                 </div>
                 {showSearch && !collapseLinks && (

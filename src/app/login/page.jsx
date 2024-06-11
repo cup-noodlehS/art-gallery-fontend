@@ -2,9 +2,9 @@ import Navbar from '@/components/generics/navbar';
 import LoginPane from '@/components/auth/LoginPane';
 
 export const metadata = {
-    title: 'MoonNine GALLERY | login',
+    title: 'MooNine GALLERY | login',
     description:
-        'Login to MoonNine GALLERY to start bidding on your favorite artworks.',
+        'Login to MooNine GALLERY to start bidding on your favorite artworks.',
 };
 
 function Page() {

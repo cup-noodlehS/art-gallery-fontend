@@ -3,7 +3,7 @@ import Footer from '@/components/generics/Footer';
 import LikedPane from '@/components/Liked/LikedPane';
 
 export const metadata = {
-    title: 'Liked Artworks | MoonNine GALLERY',
+    title: 'Liked Artworks | MooNine GALLERY',
     description: 'View all the artworks you have liked.',
 };
 

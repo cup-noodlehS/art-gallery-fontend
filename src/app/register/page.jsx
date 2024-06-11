@@ -3,8 +3,8 @@ import RegisterPane from '@/components/auth/RegisterPane';
 import React from 'react';
 
 export const metadata = {
-    title: 'MoonNine GALLERY | Sign up',
-    description: 'Sign up to MoonNine GALLERY',
+    title: 'MooNine GALLERY | Sign up',
+    description: 'Sign up to MooNine GALLERY',
 };
 
 function page() {
