@@ -269,7 +269,7 @@ const SingleArtworkPage = ({ params }) => {
                 <FullLoader />
             ) : (
                 <div className=" py-5 container mx-auto min-h-lvh font-Adamina">
-                    <div className="flex justify-between items-center w-full">
+                    <div className="flex justify-between items-center w-full px-2 text-sm md:text-base">
                         <div className="flex gap-3 mt-3 font-light">
                             <Link href="/">Home</Link>
                             <h1>/</h1>
@@ -376,7 +376,7 @@ const SingleArtworkPage = ({ params }) => {
 
                     <div className="w-full h-auto flex flex-wrap justify-center mt-20 gap-10">
                         <div>
-                            <div className="flex gap-6">
+                            <div className="flex gap-6 flex-col md:flex-row">
                                 <div className="min-w-[400px]">
                                     {artwork && (
                                         <div className="relative h-[569.4px]">
@@ -394,7 +394,7 @@ const SingleArtworkPage = ({ params }) => {
                                     )}
                                 </div>
 
-                                <div className="flex flex-col justify-start gap-3">
+                                <div className="flex flex-row md:flex-col justify-start gap-3">
                                     {artwork.images.map((image, index) => (
                                         <div
                                             key={index}
