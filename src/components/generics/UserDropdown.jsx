@@ -42,6 +42,18 @@ const UserDropdown = forwardRef((props, ref) => {
                             <FontAwesomeIcon icon={faPalette} />
                             Artworks
                         </a>
+                        <a
+                            href={`/login`}
+                            className={`flex gap-2 items-center text-white hover:underline transition duration-100 ${pathname === '/artworks' ? 'opacity-100' : 'opacity-50'}`}
+                        >
+                            Login
+                        </a>
+                        <a
+                            href={`/register`}
+                            className={`flex gap-2 items-center text-white hover:underline transition duration-100 ${pathname === '/artworks' ? 'opacity-100' : 'opacity-50'}`}
+                        >
+                            Sign up
+                        </a>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-3 p-4">
