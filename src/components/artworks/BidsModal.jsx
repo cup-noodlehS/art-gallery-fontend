@@ -21,7 +21,7 @@ function BidsModal(params) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedBidId, setSelectedBidId] = useState(null);
 
-    const isArtworkOwner = user.id === artistId;
+    const isArtworkOwner = user?.id === artistId;
     const isForSale = artwork.status === 0;
 
     const getBids = async () => {
@@ -90,7 +90,7 @@ function BidsModal(params) {
                             <div className="grow w-full px-2 pt-3 flex flex-col gap-3 overflow-y-auto">
                                 {bids.map((bid, index) => (
                                     <div key={bid.id}>
-                                        {user.id === bid.user.id &&
+                                        {user?.id === bid.user.id &&
                                             isForSale && (
                                                 <div className="relative flex justify-end">
                                                     <button
@@ -117,7 +117,7 @@ function BidsModal(params) {
                                         >
                                             <div className="flex flex-col gap-2">
                                                 <h3 className="font-bold">
-                                                    {user.id !== bid.user.id
+                                                    {user?.id !== bid.user.id
                                                         ? bid.is_anonymous
                                                             ? 'Anonymous'
                                                             : bid.user.username

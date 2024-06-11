@@ -11,7 +11,7 @@ import { useAuthStore } from '@/store/auth';
 function AddBidModal(props) {
     const { setShowAddBidModal, setShowBidsModal, artwork } = props;
     const artworkId = artwork.id;
-    const { user } = useAuthStore();
+    const { user, getUser } = useAuthStore();
     const { createBid, fetchBids } = useBidStore();
     const router = useRouter();
 
@@ -72,6 +72,11 @@ function AddBidModal(props) {
 
     const getHighestBid = async () => {
         setIsloading(true);
+        const idk = user || (await getUser());
+        if (!idk) {
+            router.push('/login');
+            return;
+        }
         try {
             const filters = {
                 artwork_id: artworkId,

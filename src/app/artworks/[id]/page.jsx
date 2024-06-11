@@ -113,8 +113,8 @@ const SingleArtworkPage = ({ params }) => {
     };
 
     const toggleLike = async () => {
-        const user = user || (await getUser());
-        if (!user) {
+        const idk = user || (await getUser());
+        if (!idk) {
             router.push(`/login?redirect=/artworks/${artwork.slug}`);
             return;
         }
@@ -158,8 +158,8 @@ const SingleArtworkPage = ({ params }) => {
 
     const fetchArtworkById = async () => {
         try {
-            await getUser();
             setIsLoadingArtwork(true);
+            await getUser();
             const data = await fetchArtwork(artworkId);
             setArtwork(data);
             setLikesCount(data.likes_count);
@@ -198,8 +198,8 @@ const SingleArtworkPage = ({ params }) => {
     };
 
     const toggleFollow = async () => {
-        const user = user || (await getUser());
-        if (!user) {
+        const idk = user || (await getUser());
+        if (!idk) {
             router.push(`/login?redirect=/artworks/${artwork.slug}`);
             return;
         }
