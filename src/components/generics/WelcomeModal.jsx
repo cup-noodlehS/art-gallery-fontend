@@ -31,14 +31,15 @@ function WelcomeModal(props) {
                 ref={contRef}
                 class="absolute bg-white p-5 rounded-md max-h-[80%] overflow-y-auto w-[400px] max-w-[90%] z-[99999]"
             >
-                <div className="flex justify-end">
-                    <button onClick={close}>
+                <div className="flex justify-end relative h-[20px]">
+                    <button className="fixed" onClick={close}>
                         <FontAwesomeIcon icon={faClose} />
                     </button>
                 </div>
                 <h1 className="font-bold text-xl text-center mb-2">
                     Welcome to Moonine Gallery!
                 </h1>
+
                 <h2 className="italic mb-1 font-semibold">
                     This is a Prototype Functional Website
                 </h2>
