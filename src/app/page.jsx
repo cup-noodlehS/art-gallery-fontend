@@ -82,7 +82,7 @@ export default function Home() {
             <main className="min-h-screen pb-72 font-Adamina">
                 <div className="container max-w-[1536px] mx-auto">
                     {!isLoadingArtworks && (
-                        <div className="w-full h-lvh ">
+                        <div className="w-full h-[calc(100vh-75px)] ">
                             <Carousel
                                 autoplay
                                 loop
