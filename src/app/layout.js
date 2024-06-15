@@ -11,6 +11,7 @@ export const metadata = {
     author: 'Sheldon Arthur Sagrado',
     ogTitle: 'MooNine | GALLERY',
     ogDescription: 'An art auction website for artists and art enthusiasts.',
+    ogUrl: 'https://moonine.vercel.app',
 };
 
 export default function RootLayout({ children }) {
@@ -27,8 +28,8 @@ export default function RootLayout({ children }) {
                     property="og:description"
                     content={metadata.ogDescription}
                 />
-                {/* <meta property="og:url" content={metadata.ogUrl} />
-        <meta property="og:image" content={metadata.ogImage} /> */}
+                <meta property="og:url" content={metadata.ogUrl} />
+                {/* <meta property="og:image" content={metadata.ogImage} /> */}
                 <link
                     rel="stylesheet"
                     href={`https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap`}
