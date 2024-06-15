@@ -374,7 +374,7 @@ const SingleArtworkPage = ({ params }) => {
                         </div>
                     </div>
 
-                    <div className="w-full h-auto flex flex-wrap justify-center mt-20 gap-10">
+                    <div className="w-full h-auto flex flex-wrap justify-center mt-10 gap-10">
                         <div>
                             <div className="flex gap-6 flex-col md:flex-row">
                                 <div className="min-w-[400px]">

@@ -43,7 +43,7 @@ const ArtworkPane = () => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [categorySearchKey, setCategorySearchKey] = useState('');
     const [finishedInitialFetch, setFinishedInitialFetch] = useState(false);
-    const [showCategories, setShowCategories] = useState(true);
+    const [showCategories, setShowCategories] = useState(false);
 
     const categoryRef = useRef(null);
 
@@ -261,7 +261,35 @@ const ArtworkPane = () => {
                 </CSSTransition>
 
                 <div className="mt-5 grow">
-                    <h1 className="text-3xl font-semibold">ARTWORKS</h1>
+                    <div className="w-full flex justify-between items-center">
+                        <h1 className="text-3xl font-semibold">ARTWORKS</h1>
+                        {screenWidth <= LAPTOP_SCREEN_SIZE && (
+                            <div className="flex gap-2 items-stretch">
+                                <Link
+                                    href={'/artworks/new'}
+                                    className="btn btn-neutral text-xl rounded-sm font-normal h-[52px]"
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faPlus}
+                                        width={20}
+                                        height={20}
+                                    />
+                                </Link>
+                                <button
+                                    onClick={() =>
+                                        setShowCategories(!showCategories)
+                                    }
+                                    className="btn rounded-sm"
+                                >
+                                    <Icon
+                                        path={mdiFilterVariant}
+                                        size={1}
+                                        color="currentColor"
+                                    />
+                                </button>
+                            </div>
+                        )}
+                    </div>
                     <div className="flex flex-wrap gap-x-3 gap-y-3 items-center justify-center m-2">
                         <label className="input input-bordered flex bg-black/[.02] rounded-sm items-center gap-2 min-w-[50%] grow">
                             <input
@@ -287,31 +315,33 @@ const ArtworkPane = () => {
                             </svg>
                         </label>
 
-                        <div className="flex gap-2 items-stretch grow justify-end md:justify-start">
-                            <Link
-                                href={'/artworks/new'}
-                                className="btn btn-neutral text-xl rounded-sm font-normal h-[52px]"
-                            >
-                                <FontAwesomeIcon
-                                    icon={faPlus}
-                                    width={20}
-                                    height={20}
-                                />
-                                Add Artwork
-                            </Link>
-                            <button
-                                onClick={() =>
-                                    setShowCategories(!showCategories)
-                                }
-                                className="btn rounded-sm"
-                            >
-                                <Icon
-                                    path={mdiFilterVariant}
-                                    size={1}
-                                    color="currentColor"
-                                />
-                            </button>
-                        </div>
+                        {screenWidth > LAPTOP_SCREEN_SIZE && (
+                            <div className="flex gap-2 items-stretch grow justify-end md:justify-start">
+                                <Link
+                                    href={'/artworks/new'}
+                                    className="btn btn-neutral text-xl rounded-sm font-normal h-[52px]"
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faPlus}
+                                        width={20}
+                                        height={20}
+                                    />
+                                    Add Artwork
+                                </Link>
+                                <button
+                                    onClick={() =>
+                                        setShowCategories(!showCategories)
+                                    }
+                                    className="btn rounded-sm"
+                                >
+                                    <Icon
+                                        path={mdiFilterVariant}
+                                        size={1}
+                                        color="currentColor"
+                                    />
+                                </button>
+                            </div>
+                        )}
                     </div>
                     <div className="mt-10 flex gap-5 flex-wrap justify-center md:justify-start">
                         {isFetchingArtworks && (
